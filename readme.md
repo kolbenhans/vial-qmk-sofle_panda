@@ -18,7 +18,7 @@ This repository contains my personal QMK firmware configuration for the **Sofle 
 ## Hardware Supported
 
 * **PCBs:** Sofle Panda (Split)
-* **Controllers:** Pro Micro, Elite-C, or Nice!Nano (compatible with QMK)
+* **Controllers:** Pro Micro with RP2040
 * **Peripherals:** 2x SSD1306 OLED Displays (128x32), EC11 Rotary Encoders, RGB Underglow/Per-key.
 
 ---
