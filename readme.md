@@ -1,4 +1,4 @@
-# Sofle Panda - Custom QWERTZ Configuration
+# Sofle Panda - Custom Configuration
 
 ![sofle_panda](https://raw.githubusercontent.com/keycapsss/Panda-Split-Keyboard/main/images/panda_top.jpg)
 
