@@ -1,7 +1,5 @@
 # Sofle Panda - Custom Configuration
 
-![sofle_panda](https://raw.githubusercontent.com/keycapsss/Panda-Split-Keyboard/main/images/panda_top.jpg)
-
 This repository contains a highly customized QMK firmware for the **Sofle Panda** (6×4+5 keys split ergonomic keyboard). While the default layout is pre-configured for German QWERTZ, the main focus of this build is the **full Vial integration** and advanced visual feedback.
 
 ## Key Features
