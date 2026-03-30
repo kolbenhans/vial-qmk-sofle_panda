@@ -2,30 +2,27 @@
 
 ![sofle_panda](https://raw.githubusercontent.com/keycapsss/Panda-Split-Keyboard/main/images/panda_top.jpg)
 
-This repository contains my personal QMK firmware configuration for the **Sofle Panda**, a 6×4+5 keys split ergonomic keyboard. It features a specialized German QWERTZ layout, advanced OLED animations, and dynamic RGB indicator logic.
+This repository contains a highly customized QMK firmware for the **Sofle Panda** (6×4+5 keys split ergonomic keyboard). While the default layout is pre-configured for German QWERTZ, the main focus of this build is the **full Vial integration** and advanced visual feedback.
 
 ## Key Features
 
-* **German Layout:** Native QWERTZ support with optimized symbol access on the Raise layer.
-* **Dynamic Layers:** * `_QWERTZ`: Base typing layer.
-    * `_RAISE`: Symbols, navigation, and F-keys.
-    * `_NUMPAD`: Dedicated right-hand Numpad with math operators.
-    * `_AMBIENT`: RGB control and media keys.
-    * `_GAMING`: Performance mode with specialized key bindings and distinct LED indicators.
-* **OLED Logic:** Supports multiple animations including Soundmonster, Luna, BongoCat, and the custom Panda animation.
-* **Encoder Support:** Volume control, media skipping, and RGB adjustments via the dual rotary encoders.
+* **Vial Support:** Full compatibility with the [Vial firmware](https://get.vial.today/). Change your keymap, macros, and encoders in real-time without re-flashing.
+* **Advanced OLED Logic:** Integrated support for multiple animations, including *Soundmonster*, *Luna*, *BongoCat*, and a custom *Panda* animation.
+* **Dynamic RGB Indicators:** Smart per-key lighting that changes based on the active layer to provide instant visual feedback.
+* **Dual Encoder Support:** Pre-configured for volume control, media skipping, and RGB adjustments, all customizable via Vial.
+* **Default Layout:** Optimized base layer with easy symbol access on the Raise layer.
 
 ## Hardware Supported
 
 * **PCBs:** Sofle Panda (Split)
-* **Controllers:** Pro Micro with RP2040
-* **Peripherals:** 2x SSD1306 OLED Displays (128x32), EC11 Rotary Encoders, RGB Underglow/Per-key.
+* **Controllers:** RP2040-based controllers (e.g., Pro Micro RP2040)
+* **Peripherals:** 2x SSD1306 OLED Displays (128x32), EC11 Rotary Encoders, Per-key RGB & Underglow.
 
 ---
 
 ## Build Instructions
 
-After setting up your [QMK environment](https://docs.qmk.fm/#/getting_started_build_tools), you can compile and flash this layout:
+If you want to modify the source code or the advanced RGB logic, use the following commands after setting up your [QMK environment](https://docs.qmk.fm/#/getting_started_build_tools):
 
 ### Compile
 ```bash
@@ -40,7 +37,7 @@ qmk flash -kb sofle_panda -km vial
 
 ## Customization & RGB Logic
 
-The file `keymaps/vial/keymap.c` contains highly personalized code, specifically within the `rgb_matrix_indicators_advanced_user` function. 
+The core logic resides in keymaps/vial/keymap.c. While the keymap itself is flexible via Vial, the LED behavior is hard-coded for maximum performance and specific visual cues.
 
 ### Layer-Specific Lighting
 The keyboard uses dynamic RGB indicators to visualize the active layer:
