@@ -69,7 +69,7 @@ qmk flash -kb sofle_panda -km vial
 
 ## Customization & RGB Logic
 
-The core logic resides in keymaps/vial/keymap.c. While the keymap itself is flexible via Vial, the LED behavior is hard-coded for maximum performance and specific visual cues.
+The core logic resides in keymaps/vial/custom_lightning.c. While the keymap itself is flexible via Vial, the LED behavior is hard-coded for maximum performance and specific visual cues.
 
 ### Layer-Specific Lighting
 The keyboard uses dynamic RGB indicators to visualize the active layer:
