@@ -1,13 +1,14 @@
 #include QMK_KEYBOARD_H
 #include "sofle_panda.h"
-//#include "oled.c" // We include the manufacturer's display logic
-// #include "display_oled.c"  // Mechaboards OLED Display
+#include "custom_lighting.h"
 
 #ifdef OLED_ENABLE
     #if defined(OLED_EFFECT_SOUNDMONSTER)
     #include "oled/soundmonster.c"
     #elif defined(OLED_EFFECT_LUNA)
     #include "oled/luna.c"
+    #elif defined(OLED_EFFECT_LUNABONGO)
+    #include "oled/lunabongo.c"
     #elif defined(OLED_EFFECT_BONGOCAT)
     #include "oled/bongocat.c"
     #elif defined(OLED_EFFECT_SNAKEY)
@@ -17,18 +18,9 @@
     #elif defined(OLED_EFFECT_PANDA)
     #include "oled/pandakb.c"
     #elif defined(OLED_EFFECT_MECHABOARDS)
-    #include "oled/mechaboards.c"    
+    #include "oled/mechaboards.c"
     #endif
 #endif
-
-enum sofle_layers {
-    _DEFAULTS = 0,
-    _QWERTZ = 0,
-    _RAISE,
-    _NUMPAD,
-    _AMBIENT,
-    _GAMING
-};
 
 enum custom_keycodes {
     KC_QWERTZ = SAFE_RANGE,
@@ -46,21 +38,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_GAMING] = LAYOUT(KC_NO, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, LGUI(KC_1), LGUI(KC_2), LGUI(KC_3), LGUI(KC_4), LGUI(KC_5), RGUI(KC_6), KC_LALT, KC_H, KC_Q, KC_W, KC_E, KC_R, LCTL(KC_W), LCTL(KC_T), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TAB, KC_LSFT, KC_A, KC_S, KC_D, KC_F, LCTL(KC_TAB), KC_WBAK, KC_WFWD, LCS(KC_TAB), KC_TRNS, KC_TRNS, KC_LGUI, KC_LCTL, KC_Z, KC_X, KC_C, KC_G, KC_TRNS, KC_TRNS, KC_LEFT, KC_UP, KC_DOWN, KC_RGHT, KC_TRNS, KC_TRNS, KC_NO, KC_Y, KC_M, KC_B, KC_SPC, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, TG(4))
 };
 
-const uint8_t PROGMEM left_row_1[] = {11, 12, 21, 22, 31, 32}; // Number row
-const uint8_t PROGMEM left_thumbs[] = {7, 16, 17, 26, 27, 36}; // Thumbs / Bottom row
-const uint8_t PROGMEM left_outer_mod[] = {11, 10, 9, 8, 7};    // Left edge
-
-// Helper lists for the right side (Physical positions)
-const uint8_t PROGMEM right_outer_mod[] = {47, 46, 45, 44, 43};  // Far right outer (top to bottom)
-const uint8_t PROGMEM right_inner_mod[] = {68, 69, 70, 71, 36};  // Far left inner / Potentiometer (top to bottom)
-const uint8_t PROGMEM right_row_1[] = {47, 48, 57, 58, 67, 68}; // Top row (right to left)
-const uint8_t PROGMEM right_thumbs[] = {43, 52, 53, 62, 63, 36}; // Bottom row / Thumbs (right to left)
-const uint8_t PROGMEM right_numpad[] = {
-    53, // 0
-    64, 61, 54, // 1, 2, 3
-    65, 60, 55, // 4, 5, 6
-    66, 59, 56  // 7, 8, 9
-};
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #ifdef KEYBOARD_PET
@@ -123,64 +100,8 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
 };
 #endif
 
-void set_led_safe(uint8_t id, uint8_t r, uint8_t g, uint8_t b, uint8_t min, uint8_t max) {
-    if (id >= min && id <= max) {
-        rgb_matrix_set_color(id, r, g, b);
-    }
-}
-
+// custom lightning see custom_lightning.c / .h
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-    uint8_t layer = get_highest_layer(layer_state | default_layer_state);
-
-    if (layer > 0) {
-        for (uint8_t i = led_min; i <= led_max; i++) {
-            rgb_matrix_set_color(i, 0, 0, 0); 
-        }
-    }
-
-    switch(layer) {
-        case 4:
-            set_led_safe(9,  255, 165, 0,   led_min, led_max); // Orange
-            set_led_safe(10, 0,   255, 0,   led_min, led_max); // Green
-            set_led_safe(19, 255, 0,   0,   led_min, led_max); // Red
-            set_led_safe(20, 255, 255, 255, led_min, led_max); // White
-            set_led_safe(23, 255, 0,   0,   led_min, led_max); // Red
-            set_led_safe(24, 255, 0,   0,   led_min, led_max); // Red
-            set_led_safe(29, 255, 0,   0,   led_min, led_max); // Red
-            set_led_safe(30, 255, 255, 255, led_min, led_max); // White
-            set_led_safe(43, 0,   128, 128, led_min, led_max); // Teal
-            break;
-
-        case 3:
-            set_led_safe(0,  RGB_BLUE,   led_min, led_max);
-            set_led_safe(69, RGB_RED,    led_min, led_max);
-            set_led_safe(70, RGB_GREEN,  led_min, led_max);
-            set_led_safe(71, RGB_YELLOW, led_min, led_max);
-            break;
-
-        case 2:
-            set_led_safe(0,  RGB_MAGENTA, led_min, led_max);
-            set_led_safe(68, RGB_TEAL,    led_min, led_max);            
-            for (uint8_t i = 0; i < 10; i++) {
-                set_led_safe(pgm_read_byte(&right_numpad[i]), RGB_BLUE, led_min, led_max);
-            }
-            set_led_safe(60, RGB_ORANGE, led_min, led_max);
-            set_led_safe(69, RGB_GREEN,   led_min, led_max);
-            set_led_safe(70, RGB_RED,   led_min, led_max);
-            set_led_safe(49, RGB_GREEN,   led_min, led_max);
-            set_led_safe(50, RGB_RED,   led_min, led_max);
-            set_led_safe(36, RGB_BLUE,   led_min, led_max);
-            break;
-
-        case 1:
-            set_led_safe(0,  RGB_GREEN,  led_min, led_max);
-            set_led_safe(34, RGB_PURPLE, led_min, led_max);
-            set_led_safe(35, RGB_ORANGE, led_min, led_max);
-            set_led_safe(70, RGB_RED,    led_min, led_max);
-            set_led_safe(65, RGB_BLUE,   led_min, led_max);
-            set_led_safe(60, RGB_GREEN,  led_min, led_max);
-            set_led_safe(55, RGB_ORANGE, led_min, led_max);
-            break;
-    }
+    apply_custom_lighting(led_min, led_max);
     return false;
 }

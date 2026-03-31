@@ -34,7 +34,7 @@
     #define WS2812_DI_PIN GP0
     #define WS2812_PIO_USE_PIO1
     #define RGB_MATRIX_MAXIMUM_BRIGHTNESS 180
-    #define RGB_MATRIX_TIMEOUT 600000 // 600000 = 2 minutes in ms.
+    #define RGB_MATRIX_TIMEOUT 300000 // 300000 = 5 minutes in ms.
     #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
     #define RGB_MATRIX_KEYPRESSES
     #define RGB_MATRIX_SLEEP
@@ -99,19 +99,9 @@
     #define I2C1_SDA_PIN GP2
     #define I2C1_SCL_PIN GP3
     #define OLED_BRIGHTNESS 180
-    #define OLED_TIMEOUT 60000
-    /* oled effect to display, one of 
-	* OLED_EFFECT_BONGOCAT
-	* OLED_EFFECT_SOUNDMONSTER
-	* OLED_EFFECT_LUNA
-	* OLED_EFFECT_SNAKEY
-	* OLED_EFFECT_OLED
-    * OLED_EFFECT_PANDA
-    * OLED_EFFECT_MECHABOARDS
-	*/
-	#define OLED_EFFECT_LUNA 
+    #define OLED_TIMEOUT 60000 // 60000 = 1 minute in ms.
 
 	#ifdef OLED_EFFECT_SOUNDMONSTER
-	#define OLED_FONT_H "keyboards/sofle/rev1/keymaps/vial2/oled/glcdfont.c"
+	#define OLED_FONT_H "keyboards/sofle_panda/keymaps/vial/oled/glcdfont.c"
 	#endif
 #endif

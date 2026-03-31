@@ -1,6 +1,6 @@
 {
-    "manufacturer": "PandaKB.COM",
-    "keyboard_name": "sofle_panda",
+    "manufacturer": "PandaKB",
+    "keyboard_name": "Sofle",
     "maintainer": "kolbenhans",
     "processor": "RP2040",
     "bootloader": "rp2040",

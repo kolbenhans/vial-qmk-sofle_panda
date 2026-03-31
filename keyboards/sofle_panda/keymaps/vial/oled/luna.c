@@ -167,7 +167,7 @@ static void print_logo_narrow(void) {
 }
 
 static void print_status_narrow(void) {
-    /*switch (get_highest_layer(default_layer_state)) { //Not required as only one default layer is used
+    /*switcd_layer_state)) { //Not required as only one default layer is used
         case 0:
             oled_write("SOLAR", false);
             break;
@@ -188,13 +188,16 @@ static void print_status_narrow(void) {
             oled_write("Base ", false);
             break;
         case 1:
-            oled_write("Game ", false);
-            break;
-        case 3:
             oled_write("Raise", false);
             break;
         case 2:
-            oled_write("Lower", false);
+            oled_write(" Num ", false);
+            break;
+        case 3:
+            oled_write("Ambi ", false);
+            break;
+        case 4:
+            oled_write("Game ", false);
             break;
     }
 
@@ -204,7 +207,7 @@ static void print_status_narrow(void) {
     oled_set_cursor(0, 7);
     oled_write("Caps", led_usb_state.caps_lock);
     oled_set_cursor(0, 8);
-    oled_write("Num", !(led_usb_state.num_lock));
+    oled_write("Num", (led_usb_state.num_lock));
     oled_set_cursor(0, 9);
     oled_write("Scrl", led_usb_state.scroll_lock);
 
@@ -223,14 +226,14 @@ bool oled_task_user(void) {
     led_usb_state    = host_keyboard_led_state();
     /* KEYBOARD PET VARIABLES END */
 
-    if (is_keyboard_master()) { // Drashna's OLED timeout off code for animations
-        if (timer_elapsed32(oled_timer) > 30000) {
-            oled_off();
-            return false;
-        } else {
-            oled_on();
-        }
-    }
+    // if (is_keyboard_master()) { // Drashna's OLED timeout off code for animations
+    //     if (timer_elapsed32(oled_timer) > 30000) {
+    //         oled_off();
+    //         return false;
+    //     } else {
+    //         oled_on();
+    //     }
+    // }
 
     if (is_keyboard_master()) {
         print_status_narrow();
