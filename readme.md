@@ -34,7 +34,7 @@ VialRGBEffect(48, "Starlight Smooth"),
 VialRGBEffect(49, "Starlight Hue"),
 VialRGBEffect(50, "Starlight Sat"),
 ```
-## A updated Vial.AppImage can be found in vial.appimage folder
+## A updated Vial.AppImage can be found in extended Vial appimage folder
 
 ## Key Features
 
