@@ -2,6 +2,40 @@
 
 This repository contains a highly customized QMK firmware for the **Sofle Panda** (6×4+5 keys split ergonomic keyboard). While the default layout is pre-configured for German QWERTZ, the main focus of this build is the **full Vial integration** and advanced visual feedback.
 
+# 🚀 Sofle Panda - Build Information
+
+> [!IMPORTANT]
+> This firmware build uses a custom integration of **Vial-QMK** and requires local modifications to the **Vial-GUI** to unlock all hardware-defined lighting features.
+
+## 🛠 Firmware Base
+- **Source:** [vial-kb/vial-qmk](https://github.com/vial-kb/vial-qmk) 
+- **Branch:** `merge-2025-12-28`
+- **Patches:** Manually integrated [Pull Request #657](https://github.com/vial-kb/vial-qmk/pull/657) (plus the *Starlight Smooth* addition on top).
+
+### Why this branch?
+The `merge-2025-12-28` branch was chosen because it includes advanced RGB Matrix animations from qmk that are not yet available in the standard Vial/QMK branches. The following animation files are integrated and functional in this build:
+* `flower_blooming_anim.h`
+* `pixel_flow_anim.h`
+* `riverflow_anim.h`
+* `starlight_anim.h`
+* `starlight_dual_hue_anim.h`
+* `starlight_dual_sat_anim.h`
+* `starlight_smooth_anim.h`
+
+## 🌈 Extended RGB Support (Vial-GUI)
+To make these effects selectable in the Vial-GUI dropdown menu, the software must be executed locally or compiled to a AppImage from source with the following additions in `src/main/python/editor/rgb_configurator.py`:d
+
+```python
+# Add these lines to the VIALRGB_EFFECTS list:
+VialRGBEffect(45, "Pixel Flow"),
+VialRGBEffect(46, "Flower Blooming"),
+VialRGBEffect(47, "Starlight"),
+VialRGBEffect(48, "Starlight Smooth"),
+VialRGBEffect(49, "Starlight Hue"),
+VialRGBEffect(50, "Starlight Sat"),
+```
+## A updated Vial.AppImage can be found in vial.appimage folder
+
 ## Key Features
 
 * **Vial Support:** Full compatibility with the [Vial firmware](https://get.vial.today/). Change your keymap, macros, and encoders in real-time without re-flashing.
